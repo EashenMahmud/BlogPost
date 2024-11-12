@@ -1,21 +1,26 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PublicPostController;
-use Illuminate\Support\Facades\Route;
 
-// Public routes
-Route::get('/', [PublicPostController::class, 'latestPosts'])->name('welcome');
-Route::get('/posts/details/{post}', [PublicPostController::class, 'details'])->name('posts.details');
+// Public Routes
+Route::get('/', [PublicPostController::class, 'latestPosts'])->name('public.home');
+Route::get('/public/posts/details/{post}', [PublicPostController::class, 'details'])->name('public.posts.details');
+Route::get('/public/categories/{category}', [PublicPostController::class, 'categoryPosts'])->name('public.categories.posts');
+Route::get('/about', [AboutController::class, 'about'])->name('public.about');
+Route::get('/contact', [ContactController::class, 'contact'])->name('public.contact');
 
-// Authenticated routes
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Authenticated/Admin Routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard'); // Point to the admin dashboard page
+    })->name('dashboard');
 
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

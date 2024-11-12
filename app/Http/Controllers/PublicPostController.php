@@ -12,7 +12,7 @@ class PublicPostController extends Controller
         $posts = Post::with('category')
             ->where('status', 1)
             ->latest()
-            ->take(4)
+            ->take(3)
             ->get();
     
         // Retrieve all categories with their posts (only active posts)
@@ -20,12 +20,20 @@ class PublicPostController extends Controller
             $query->where('status', 1)->latest();
         }])->get();
     
-        return view('welcome', compact('posts', 'categories'));
+        return view('public.home', compact('posts', 'categories'));
     }
     
     public function details(Post $post)
     {
-        return view('posts.details', compact('post'));
+        return view('public.posts.details', compact('post'));
+    }
+
+    public function categoryPosts(Category $category)
+    {
+        // Retrieve only active posts for the specific category
+        $posts = $category->posts()->where('status', 1)->latest()->paginate(9); // Paginate if you want to limit posts per page
+        
+        return view('public.posts.category', compact('category', 'posts'));
     }
  
 }
