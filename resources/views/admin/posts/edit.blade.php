@@ -1,22 +1,22 @@
-<!-- resources/views/admin/posts/edit.blade.php -->
-
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Post') }}
-        </h2>
-    </x-slot>
+   
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
+    <div class="py-12 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md rounded-lg p-6">
+            <h2
+                    class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight border-b-2">
+                    {{ __('Edit Post') }}
+                </h2>
+                <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT') <!-- Specify the HTTP method for updating -->
 
-                    <div class="mb-4">
-                        <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
-                        <select name="category_id" id="category_id" required class="mt-1 block w-full rounded-md">
+                    <!-- Category -->
+                    <div>
+                        <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+                        <select name="category_id" id="category_id" required
+                                class="block w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 shadow-sm  px-4 py-2">
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}" {{ $cat->id == $post->category_id ? 'selected' : '' }}>
                                     {{ $cat->name }}
@@ -25,36 +25,53 @@
                         </select>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
-                        <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" required
-                               class="mt-1 block w-full rounded-md">
+                    <!-- Title -->
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
+                        <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" required placeholder="Enter post title"
+                               class="block w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 shadow-sm  px-4 py-2">
                     </div>
 
-                    <div class="mb-4">
-                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
-                        <textarea name="description" id="description" rows="4" required
-                                  class="mt-1 block w-full rounded-md">{{ old('description', $post->description) }}</textarea>
+                    <!-- Description -->
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</label>
+                        <textarea name="description" id="description" rows="4" required placeholder="Write something..."
+                                  class="block w-full rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 shadow-sm  px-4 py-2">{{ old('description', $post->description) }}</textarea>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Image</label>
-                        <input type="file" name="image" id="image" class="mt-1 block w-full">
+                    <!-- Image -->
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Image</label>
+                        <input type="file" name="image" id="image"
+                               class="block w-full text-gray-700 dark:text-gray-300 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-800 shadow-sm  px-4 py-2">
                         @if ($post->image)
-                            <p class="mt-2">Current Image:</p>
-                            <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="mt-2 w-32 h-32 object-cover">
+                            <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">Current Image:</p>
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="mt-2 w-32 h-32 rounded-lg object-cover shadow">
                         @endif
                     </div>
 
-                    <div class="mb-4">
-                        <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
-                        <select name="status" id="status" class="mt-1 block w-full rounded-md">
-                            <option value="1" {{ $post->status ? 'selected' : '' }}>Active</option>
-                            <option value="0" {{ !$post->status ? 'selected' : '' }}>Inactive</option>
-                        </select>
+                    <!-- Status -->
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-gray-700 dark:text-gray-300">Inactive</span>
+                            <label for="status-switch" class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" name="status" id="status-switch" value="1"
+                                       class="sr-only peer" {{ $post->status ? 'checked' : '' }}>
+                                <div class="w-10 h-5 bg-gray-300 peer-focus:ring-4 peer-focus:ring-indigo-500 dark:peer-focus:ring-indigo-600 rounded-full peer dark:bg-gray-700 peer-checked:bg-indigo-600"></div>
+                                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+                            </label>
+                            <span class="text-sm text-gray-700 dark:text-gray-300">Active</span>
+                        </div>
                     </div>
 
-                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">Update Post</button>
+                    <!-- Submit Button -->
+                    <div>
+                        <button type="submit"
+                                class=" bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold shadow hover:bg-indigo-700 transition focus:outline-none focus:ring focus:ring-indigo-500">
+                            Update Post
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

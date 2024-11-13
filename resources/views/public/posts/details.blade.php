@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="py-16 bg-gray-100 dark:bg-gray-900 ">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg">
                 @if($post->image)
                     <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-72 object-cover rounded-t-lg">

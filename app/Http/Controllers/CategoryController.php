@@ -8,19 +8,23 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // Fetch all categories
         $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
-    }
 
-    public function create()
-    {
-        return view('admin.categories.create');
+        // Check if editing is requested
+        $editCategory = null;
+        if ($request->has('edit')) {
+            $editCategory = Category::find($request->edit);
+        }
+
+        return view('admin.categories.index', compact('categories', 'editCategory'));
     }
 
     public function store(Request $request)
     {
+        // Validate and create a new category
         $request->validate([
             'name' => 'required|string|max:255',
             'details' => 'nullable|string',
@@ -30,6 +34,7 @@ class CategoryController extends Controller
 
         $data = $request->all();
 
+        // Handle image upload
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('categories', 'public');
         }
@@ -39,13 +44,9 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
-    public function edit(Category $category)
-    {
-        return view('admin.categories.edit', compact('category'));
-    }
-
     public function update(Request $request, Category $category)
     {
+        // Validate and update the existing category
         $request->validate([
             'name' => 'required|string|max:255',
             'details' => 'nullable|string',
@@ -55,6 +56,7 @@ class CategoryController extends Controller
 
         $data = $request->all();
 
+        // Handle image upload
         if ($request->hasFile('image')) {
             if ($category->image) {
                 Storage::disk('public')->delete($category->image);
@@ -69,6 +71,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        // Handle deletion of a category
         if ($category->image) {
             Storage::disk('public')->delete($category->image);
         }
