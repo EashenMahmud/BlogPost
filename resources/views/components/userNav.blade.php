@@ -3,8 +3,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
-                <a href="/" class="text-2xl font-bold text-blue-600">BACBON School</a>
+                <a href="/" class="flex items-center space-x-2">
+                    <!-- Add image logo -->
+                    <img src="./assets/images/BT_01.png" alt="BACBON Tutors Logo"
+                        class="h-36 w-36 object-contain">
+                    <!-- Fallback text for accessibility -->
+                </a>
             </div>
+
 
             <div class="hidden md:flex items-center space-x-8">
                 <a href="{{ url('/') }}"
@@ -39,14 +45,14 @@
         <!-- Mobile Navigation -->
         <div class="mobile-menu-hidden md:hidden" id="mobile-menu">
             <div class="flex flex-col space-y-2 pt-4 pb-4 border-t border-gray-200">
-            <a href="{{ url('/') }}"
+                <a href="{{ url('/') }}"
                     class="text-gray-700 font-medium hover:text-blue-600 transition {{ request()->is('/') ? 'border-b-[3px] border-blue-600' : '' }}">Home</a>
                 <a href="{{ url('/about') }}"
                     class="text-gray-700 font-medium hover:text-blue-600 transition {{ request()->is('about') ? 'border-b-4 border-blue-600' : '' }}">About
                     Us</a>
                 <a href="{{ url('/contact') }}"
                     class="text-gray-700 font-medium hover:text-blue-600 transition {{ request()->is('contact') ? 'border-b-4 border-blue-600' : '' }}">Contact</a>
-                    @auth
+                @auth
                     <a href="{{ url('/dashboard') }}"
                         class="text-gray-700 hover:text-blue-600 transition px-4 font-medium">Dashboard</a>
 

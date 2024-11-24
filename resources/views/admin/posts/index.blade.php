@@ -57,6 +57,10 @@
                             </th>
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+                                Author
+                            </th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                                 Status
                             </th>
                             <th
@@ -74,10 +78,13 @@
                                 <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
                                     {{ $post->category->name }}
                                 </td>
+                                <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
+                                    {{ $post->user->name ?? 'N/A' }} <!-- Display user's name -->
+                                </td>
                                 <td class="px-6 py-4 text-sm">
                                     <span
                                         class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                        {{ $post->status ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
+                                                                {{ $post->status ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' }}">
                                         {{ $post->status ? 'Active' : 'Inactive' }}
                                     </span>
                                 </td>
@@ -140,10 +147,10 @@
             });
         });
         function clearSearch() {
-        const searchInput = document.querySelector('input[name="search"]');
-        searchInput.value = ''; // Clear the input value
-        searchInput.form.submit(); // Submit the form
-    }
+            const searchInput = document.querySelector('input[name="search"]');
+            searchInput.value = ''; // Clear the input value
+            searchInput.form.submit(); // Submit the form
+        }
     </script>
 
 </x-app-layout>
