@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicPostController;
 use App\Http\Controllers\CategoryController;
@@ -16,8 +17,7 @@ Route::get('/public/categories/{category}', [PublicPostController::class, 'categ
 Route::get('/about', [AboutController::class, 'about'])->name('public.about');
 Route::get('/contact', [ContactController::class, 'contact'])->name('public.contact');
 
-// Authenticated/Admin Routes
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified','roleChecker:admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard'); // Point to the admin dashboard page
     })->name('dashboard');
@@ -29,9 +29,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-    
+
     Route::resource('posts', PostController::class);
+    Route::resource('users', UserController::class);
     Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
 });
+
 
 require __DIR__ . '/auth.php';
