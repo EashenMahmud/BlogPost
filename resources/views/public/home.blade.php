@@ -5,8 +5,7 @@
 <!-- Hero Section with Modern Design -->
 <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-500 to-blue-200">
     <div class="absolute inset-0">
-        <img src="./assets/images/hero.jpg" alt="Education Background"
-            class="w-full h-full object-cover">
+        <img src="./assets/images/hero.jpg" alt="Education Background" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-b from-blue-900/70 to-transparent"></div>
     </div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center text-white">
@@ -75,7 +74,10 @@
                                 {{ $post->title }}
                             </h3>
 
-                            <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->description }}</p>
+                            <div class="text-gray-600 mb-4 line-clamp-2">
+                                {!! $post->description !!}
+                            </div>
+
 
                             <a href="{{ route('public.posts.details', $post->id) }}"
                                 class="inline-flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
@@ -147,7 +149,10 @@
                                             {{ $post->title }}
                                         </h3>
 
-                                        <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->description }}</p>
+                                        <div class="text-gray-600 mb-4 line-clamp-2">
+                                            {!! $post->description !!}
+                                        </div>
+
 
                                         <a href="{{ route('public.posts.details', $post->id) }}"
                                             class="inline-flex items-center text-blue-600 font-semibold group-hover:text-blue-700">

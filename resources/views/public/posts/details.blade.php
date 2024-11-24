@@ -55,8 +55,9 @@
             <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 prose prose-lg dark:prose-invert max-w-none">
                 <!-- Description -->
                 <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8 first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-3 first-letter:float-left">
-                    {{ $post->description }}
+                {!! $post->description !!}
                 </p>
+                
 
                 <!-- Content -->
                 <div class="mt-8">

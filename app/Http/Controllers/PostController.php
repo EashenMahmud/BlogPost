@@ -26,9 +26,6 @@ class PostController extends Controller
         return view('admin.posts.index', compact('posts', 'search'));
     }
     
-
-
-
     public function create()
     {
         $categories = Category::all(); // Get all categories for the dropdown
@@ -37,9 +34,10 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info($request->input('description'));
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string', // Allow rich-text HTML content
             'image' => 'nullable|image|mimes:jpg,png,jpeg',
             'status' => 'required|boolean',
             'category_id' => 'required|exists:categories,id',
@@ -63,6 +61,7 @@ class PostController extends Controller
     {
         return view('admin.posts.show', compact('post'));
     }
+
     public function edit(Post $post)
     {
         $categories = Category::all(); // Get all categories for the dropdown
@@ -73,7 +72,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string', // Allow rich-text HTML content
             'image' => 'nullable|image|mimes:jpg,png,jpeg',
             'status' => 'required|boolean',
             'category_id' => 'required|exists:categories,id',
@@ -105,6 +104,3 @@ class PostController extends Controller
                          ->with('success', 'Post deleted successfully.');
     }
 }
-
-
-

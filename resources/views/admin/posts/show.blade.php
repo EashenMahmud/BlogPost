@@ -12,7 +12,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <h3 class="text-2xl font-semibold">{{ $post->title }}</h3>
                 <p class="mt-2 text-gray-600"><strong>Category:</strong> {{ $post->category->name }}</p>
-                <p class="mt-2 text-gray-600"><strong>Description:</strong> {{ $post->description }}</p>
+                <p class="mt-2 text-gray-600"><strong>Description:</strong> {!! $post->description !!}</p>
                 
                 @if($post->image)
                     <p class="mt-4"><strong>Image:</strong></p>
