@@ -5,8 +5,9 @@
             <div class="flex items-center">
                 <a href="/" class="flex items-center space-x-2">
                     <!-- Add image logo -->
-                    <img src="./assets/images/BT_01.png" alt="BACBON Tutors Logo"
+                    <img src="{{ asset('assets/images/BT_01.png') }}" alt="BACBON Tutors Logo"
                         class="h-36 w-36 object-contain">
+
                     <!-- Fallback text for accessibility -->
                 </a>
             </div>

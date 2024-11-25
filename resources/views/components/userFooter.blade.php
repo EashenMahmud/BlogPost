@@ -5,7 +5,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
                     <h3 class="text-xl font-bold mb-4">About BACBON Tutors</h3>
-                    <p class="text-gray-400">Empowering students with knowledge and skills for a brighter future through quality education and innovative learning approaches.</p>
+                    <p class="text-gray-400">BacBon-Tutors' is a tutor management service that began in 2019 and since then we’ve helped thousands of students to find the specialist tutors they need, whether that’s a one-off response to a specific problem or ongoing support around a challenging subject. This is ‘BacBon-Tutors’ - Learning made simple.</p>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4">Quick Links</h3>

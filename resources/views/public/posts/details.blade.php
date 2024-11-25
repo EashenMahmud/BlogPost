@@ -2,7 +2,7 @@
 @section('content')
 <!-- Hero Section with Post Image -->
 <section class="relative min-h-[60vh]">
-    <div class="absolute inset-0">
+    <div class="absolute inset-0 mt-20">
         @if($post->image)
             <img 
                 src="{{ asset('storage/' . $post->image) }}" 
@@ -54,7 +54,7 @@
             <!-- Main Content Card -->
             <article class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 prose prose-lg dark:prose-invert max-w-none">
                 <!-- Description -->
-                <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8 first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-3 first-letter:float-left">
+                <p class="text-xl text-justify text-gray-600 dark:text-gray-300 leading-relaxed mb-8 first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-3 first-letter:float-left">
                 {!! $post->description !!}
                 </p>
                 
@@ -80,7 +80,7 @@
             </article>
 
             <!-- Share Section -->
-            <div class="mt-8 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm">
+            <div class="mt-8 bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm mb-4">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Share this article</h3>
                 <div class="flex space-x-4">
                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($post->title) }}" 

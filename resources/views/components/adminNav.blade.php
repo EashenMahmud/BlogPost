@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <img src="{{ asset('assets/images/BT_01.png') }}" alt="BACBON Tutors Logo"
+                    class="h-36 w-36 object-contain">
                     </a>
                 </div>
 

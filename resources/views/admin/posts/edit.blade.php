@@ -63,6 +63,8 @@
                             class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
                         <div class="flex items-center space-x-4">
                             <span class="text-sm text-gray-700 dark:text-gray-300">Inactive</span>
+                            <!-- Hidden input for default value -->
+                            <input type="hidden" name="status" value="0">
                             <label for="status-switch" class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" name="status" id="status-switch" value="1" class="sr-only peer"
                                     {{ $post->status ? 'checked' : '' }}>
@@ -76,6 +78,7 @@
                             <span class="text-sm text-gray-700 dark:text-gray-300">Active</span>
                         </div>
                     </div>
+
 
                     <!-- Submit Button -->
                     <div>
