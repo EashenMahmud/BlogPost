@@ -96,9 +96,19 @@
     </section>
 @endif
 
+<!-- View All-->
+<div class="text-center bg-gradient-to-b from-white to-gray-50 mt-4">
+    <a href="{{ route('public.posts.all') }}"
+        class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-200">
+        View All
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+    </a>
+</div>
 
 
-<section id="categories" class="py-24 bg-gradient-to-b from-gray-50 to-white">
+<section id="categories" class="pb-24 pt-12 bg-gradient-to-b from-gray-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-16">

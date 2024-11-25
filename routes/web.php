@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', [PublicPostController::class, 'latestPosts'])->name('public.home');
 Route::get('/public/posts/details/{post}', [PublicPostController::class, 'details'])->name('public.posts.details');
 Route::get('/public/categories/{category}', [PublicPostController::class, 'categoryPosts'])->name('public.categories.posts');
+Route::get('/public/posts', [PublicPostController::class, 'allPosts'])->name('public.posts.all');
 Route::get('/about', [AboutController::class, 'about'])->name('public.about');
 Route::get('/contact', [ContactController::class, 'contact'])->name('public.contact');
 
