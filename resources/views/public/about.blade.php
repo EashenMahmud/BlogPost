@@ -159,5 +159,128 @@
 </section>
 
 <!-- CSS for animations -->
+<section class="h-[920px] bg-[#FFFFFF]">
+    <div class="custom-container grid grid-cols-3 gap-8 px-0 items-center">
+        <!-- Left Side - Titles -->
+        <div class="col-span-1 flex flex-col justify-start items-start space-y-6 mt-40">
+            @foreach($sections as $index => $section)
+                <h2
+                    class="tab-link font-bold text-[#7A7A7A] text-[40px] cursor-pointer"
+                    onclick="showTabContent({{ $index }}, this)"
+                >
+                    <span class="first">{{ $section->title_first }}</span>
+                    <span class="second text-[#7A7A7A]">{{ $section->title_second }}</span>
+                </h2>
+            @endforeach
+        </div>
 
+        <!-- Right Side - Content Box (Carousel) -->
+        <div class="col-span-2 relative w-full flex justify-end items-end">
+            <div class="carousel relative w-full flex flex-col items-end justify-end space-y-4">
+                @foreach($sections as $index => $section)
+                    <div
+                        id="section-{{ $index }}"
+                        class="tab-content w-full transform transition-all duration-500 absolute top-1/2 @if($index !== 0) hidden @endif"
+                    >
+                        <div class="inner-content relative p-8 rounded-lg">
+                            <img
+                                src="{{ asset('storage/' . $section->icon) }}"
+                                alt="decorative icon"
+                                class="absolute top-6 left-8 w-10 h-10 transform -translate-x-2 -translate-y-2"
+                            />
+
+                            <p class="text-[#000000] text-[18px] leading-8 font-light text-start px-8">
+                                {{ $section->content }}
+                            </p>
+
+                            <img
+                                src="{{ asset('storage/' . $section->icon) }}"
+                                alt="decorative icon"
+                                class="absolute bottom-8 right-8 w-10 h-10 transform translate-x-2 translate-y-2"
+                            />
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const contents = document.querySelectorAll('.tab-content');
+    const totalContents = contents.length;
+
+    function showTabContent(index, element) {
+        document.querySelectorAll('.tab-link').forEach(function (tab) {
+            tab.classList.remove('text-[48px]', 'text-[#1D3AA5]');
+            tab.classList.add('text-[40px]', 'text-[#7A7A7A]');
+            tab.querySelector('.second')?.classList.remove('text-[#1D3AA5]');
+            tab.querySelector('.second')?.classList.add('text-[#7A7A7A]');
+            tab.querySelector('.first')?.classList.remove('text-[#000000]');
+            tab.querySelector('.first')?.classList.add('text-[#7A7A7A]');
+        });
+
+        element.classList.remove('text-[#7A7A7A]', 'text-[40px]');
+        element.classList.add('text-[#1D3AA5]', 'text-[48px]');
+        element.querySelector('.second')?.classList.remove('text-[#7A7A7A]');
+        element.querySelector('.second')?.classList.add('text-[#1D3AA5]');
+        element.querySelector('.first')?.classList.remove('text-[#7A7A7A]');
+        element.querySelector('.first')?.classList.add('text-[#000000]');
+
+        contents.forEach((content) => {
+            content.style.transform = "translateY(0) scale(1)";
+            content.classList.add('hidden');
+            content.style.zIndex = "1"; // Reset z-index for all contents
+            const innerContent = content.querySelector('.inner-content');
+            innerContent.classList.remove(
+                'border-b-8',
+                'border-blue-600',
+                'border-red-600',
+                'border-green-600',
+                'border-yellow-600',
+                'bg-white',
+                'font-medium'
+            );
+            innerContent.style.boxShadow = '';
+            content.querySelector('p').classList.remove('font-medium');
+        });
+
+        let borderColorClass = '';
+        if (index === 0) {
+            borderColorClass = 'border-blue-600';
+        } else if (index === 1) {
+            borderColorClass = 'border-red-600';
+        } else if (index === 2) {
+            borderColorClass = 'border-green-600';
+        } else if (index === 3) {
+            borderColorClass = 'border-yellow-600';
+        }
+
+        const currentContent = contents[index];
+        currentContent.style.transform = "translateY(0) scale(1.1)";
+        currentContent.classList.remove('hidden');
+        currentContent.style.zIndex = "10"; // Add z-index for the active content
+
+        const innerContent = currentContent.querySelector('.inner-content');
+        innerContent.classList.add('border-b-8', borderColorClass, 'bg-white');
+        innerContent.style.boxShadow = '0px 20px 30px 0px #00000033';
+        currentContent.querySelector('p').classList.add('font-normal');
+
+        const prevIndex = (index - 1 + totalContents) % totalContents;
+        const nextIndex = (index + 1) % totalContents;
+
+        contents[prevIndex].style.transform = "translateY(-150px) scale(0.9)";
+        contents[prevIndex].classList.remove('hidden');
+
+        contents[nextIndex].style.transform = "translateY(150px) scale(0.9)";
+        contents[nextIndex].classList.remove('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const firstTab = document.querySelector('.tab-link');
+        if (firstTab) {
+            showTabContent(0, firstTab);
+        }
+    });
+</script>
 @endsection

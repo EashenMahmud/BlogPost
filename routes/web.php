@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicPostController;
@@ -15,7 +16,7 @@ Route::get('/', [PublicPostController::class, 'latestPosts'])->name('public.home
 Route::get('/public/posts/details/{post}', [PublicPostController::class, 'details'])->name('public.posts.details');
 Route::get('/public/categories/{category}', [PublicPostController::class, 'categoryPosts'])->name('public.categories.posts');
 Route::get('/public/posts', [PublicPostController::class, 'allPosts'])->name('public.posts.all');
-Route::get('/about', [AboutController::class, 'about'])->name('public.about');
+Route::get('/about', [SectionController::class, 'about'])->name('public.about');
 Route::get('/contact', [ContactController::class, 'contact'])->name('public.contact');
 
 Route::middleware(['auth', 'verified','roleChecker:admin'])->group(function () {
